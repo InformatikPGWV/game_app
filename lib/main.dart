@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'src/home_screen.dart';
+import 'src/ws_handeling/ws_connection.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<WsConnection>(create: (_) => WsConnection("ws://dyn.astrago.de:8080")),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

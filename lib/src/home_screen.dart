@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:game_app/src/ws_handeling/ws_connection.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var ws = WsConnection();
+  late var ws = context.read<WsConnection>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,19 @@ class _HomeScreenState extends State<HomeScreen> {
             Builder(builder: (context) {
               if (ws.isConnected) {
                 return StreamBuilder(
-                  stream: ws.channel.stream,
+                  stream: ws.stream,
+                  builder: (ctx, snapshot) {
+                    return Text(snapshot.data.toString());
+                  },
+                );
+              } else {
+                return Text("Not Connected");
+              }
+            }),
+            Builder(builder: (context) {
+              if (ws.isConnected) {
+                return StreamBuilder(
+                  stream: ws.stream,
                   builder: (ctx, snapshot) {
                     return Text(snapshot.data.toString());
                   },
@@ -33,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 setState(() {
                   ws.connect();
+                  ws.listen();
                 });
               },
               child: Text("Connect"),
