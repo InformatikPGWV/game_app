@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'src/home_screen.dart';
 import 'src/ws_handeling/ws_connection.dart';
+import 'src/home_screen/home_screen.dart';
+import 'src/ttt_game_screen/ttt_game_screen.dart';
 
 void main() {
   runApp(
@@ -39,24 +40,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       routes: {
         HomePage.routeName: (context) => HomePage(),
+        TttGameScreen.routeName: (context) => TttGameScreen(),
       },
       initialRoute: HomePage.routeName,
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-  static const routeName = "/";
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Game Companion Alpha"),
-        centerTitle: false,
-      ),
-      body: HomeScreen(),
     );
   }
 }
