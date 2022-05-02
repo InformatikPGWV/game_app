@@ -18,6 +18,7 @@ class _TttGameScreenState extends State<TttGameScreen> {
         child: Stack(
             children:[
                 TttGridOverlay(),
+                Image(image: AssetImage("images/tTTGrid.png",),),
             ],
         ),
         ),
@@ -35,6 +36,13 @@ class TttGridOverlay extends StatefulWidget {
 class _TttGridOverlayState extends State<TttGridOverlay> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        width: MediaQuery.of(context).size.width / 1.2,
+        height: MediaQuery.of(context).size.width / 1.2,
+        child: AspectRatio(
+            aspectRatio: 1,
+            
+        ),
+    );
   }
 }
