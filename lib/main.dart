@@ -8,7 +8,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        Provider<WsConnection>(create: (_) => WsConnection("ws://dyn.astrago.de:8080")),
+        Provider<WsConnection>(
+          create: (_) => WsConnection("ws://dyn.astrago.de:8080"),
+        ),
       ],
       child: MyApp(),
     ),

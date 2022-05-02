@@ -11,17 +11,21 @@ class _TttGameScreenState extends State<TttGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Container(
         alignment: Alignment.center,
         child: Stack(
-            children:[
-                TttGridOverlay(),
-                Image(image: AssetImage("images/tTTGrid.png",),),
-            ],
+          children: [
+            TttGridOverlay(),
+            Image(
+              image: AssetImage(
+                "images/tTTGrid.png",
+              ),
+            ),
+          ],
         ),
-        ),
+      ),
     );
   }
 }
@@ -37,12 +41,11 @@ class _TttGridOverlayState extends State<TttGridOverlay> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width / 1.2,
-        height: MediaQuery.of(context).size.width / 1.2,
-        child: AspectRatio(
-            aspectRatio: 1,
-            
-        ),
+      width: MediaQuery.of(context).size.width / 1.2,
+      height: MediaQuery.of(context).size.width / 1.2,
+      child: AspectRatio(
+        aspectRatio: 1,
+      ),
     );
   }
 }
