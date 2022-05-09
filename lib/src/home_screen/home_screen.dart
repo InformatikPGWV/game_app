@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:game_app/src/debug_screen/debug_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../ttt_game_screen/ttt_game_screen.dart';
@@ -57,6 +58,18 @@ class HomePage extends StatelessWidget {
                     child: Text("Tic-Tac-Toe"),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 400,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(DebugScreen.routeName);
+                    },
+                    child: Text("DEBUG"),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
                     ),
                   ),
                 ),
