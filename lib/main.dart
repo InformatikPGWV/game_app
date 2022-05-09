@@ -11,7 +11,8 @@ void main() {
     MultiProvider(
       providers: [
         Provider<WsConnection>(
-          create: (_) => WsConnection("ws://s1.astrago.de:6969"),
+          create: (_) => WsConnection("ws://s1.astrago.de:6969"), //Official Server
+          // create: (_) => WsConnection("ws://[::1]:6969"), //Localhost
         ),
       ],
       child: MyApp(),
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Game Companion Alpha',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.light().copyWith(
           primary: Colors.blue,
