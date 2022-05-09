@@ -11,7 +11,7 @@ void main() {
     MultiProvider(
       providers: [
         Provider<WsConnection>(
-          create: (_) => WsConnection("ws://localhost:8080"),
+          create: (_) => WsConnection("ws://s1.astrago.de:6969"),
         ),
       ],
       child: MyApp(),
