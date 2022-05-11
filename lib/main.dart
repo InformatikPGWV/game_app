@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'src/ws_handeling/ws_connection.dart';
-import 'src/home_screen/home_screen.dart';
-import 'src/ttt_game_screen/ttt_game_screen.dart';
-import 'src/debug_screen/debug_screen.dart';
+import 'package:game_app/src/ws_handeling/ws_connection.dart';
+import 'package:game_app/src/home_screen/home_screen.dart';
+import 'package:game_app/src/ttt_game_screen/ttt_game_screen.dart';
+import 'package:game_app/src/debug_screen/debug_screen.dart';
+import 'package:game_app/src/settings_screen/settings_screen.dart';
 
 void main() {
   runApp(
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => HomePage(),
         TttGameScreen.routeName: (context) => TttGameScreen(),
         DebugScreen.routeName: (context) => DebugScreen(),
+        SettingsScreen.routeName: (context) => SettingsScreen(),
       },
       initialRoute: HomePage.routeName,
     );

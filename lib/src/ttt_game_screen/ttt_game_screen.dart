@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TttGameScreen extends StatefulWidget {
   TttGameScreen({Key? key}) : super(key: key);
 
-  static const routeName = "/ttt_game_screen";
+  static const routeName = "/ttt";
 
   @override
   State<TttGameScreen> createState() => _TttGameScreenState();
@@ -13,6 +13,9 @@ class _TttGameScreenState extends State<TttGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Tic-Tac-Toe"),
+      ),
       body: Center(
         child: Container(
           width: 200,
