@@ -11,6 +11,13 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Settings"),
       ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text("LOL"),
+        ],
+      ),
     );
   }
 }
