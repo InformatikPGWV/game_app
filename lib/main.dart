@@ -6,6 +6,7 @@ import 'package:game_app/src/home_screen/home_screen.dart';
 import 'package:game_app/src/ttt_game_screen/ttt_game_screen.dart';
 import 'package:game_app/src/debug_screen/debug_screen.dart';
 import 'package:game_app/src/settings_screen/settings_screen.dart';
+import 'package:game_app/src/story_game_screen/story_game_screen.dart';
 
 void main() {
   runApp(
@@ -31,13 +32,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.light().copyWith(
-          primary: Colors.blue,
+          primary: Color(0xFF284E6D),
           secondary: Colors.blueAccent,
         ),
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.dark().copyWith(
-          primary: Colors.blue,
+          primary: Color(0xFF284E6D),
           secondary: Colors.blueAccent,
         ),
       ),
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         TttGameScreen.routeName: (context) => TttGameScreen(),
         DebugScreen.routeName: (context) => DebugScreen(),
         SettingsScreen.routeName: (context) => SettingsScreen(),
+        StoryGameScreen.routeName: (context) => StoryGameScreen(),
       },
       initialRoute: HomePage.routeName,
     );
