@@ -1,12 +1,13 @@
 import 'dart:async';
-
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WsConnection {
   WsConnection(this.wSUrl);
 
-  final String wSUrl;
+  late String wSUrl;
 
   bool isConnected = false;
   bool isListening = false;
@@ -16,6 +17,22 @@ class WsConnection {
 
   final _streamController = StreamController<String>.broadcast();
   Stream<String> get stream => _streamController.stream;
+
+  void setAddress(String address) {
+    wSUrl = address;
+  }
+
+  Future<void> setAddressFromMemory() async {
+    var prefs = await SharedPreferences.getInstance();
+    String? _urlFromSetting = await prefs.getString("serverAddress");
+    if (_urlFromSetting != null) {
+      wSUrl = _urlFromSetting;
+    }
+  }
+
+  String getAddress() {
+    return wSUrl;
+  }
 
   void connectAndListen() {
     connect();
@@ -48,6 +65,7 @@ class WsConnection {
   // Listened and makes the streamm into a broadcast stream
   void listen() {
     if (isConnected && !isListening) {
+      isListening = true;
       listeningStream = channel.stream.listen((data) {
         _streamController.sink.add(data);
       });
@@ -56,6 +74,7 @@ class WsConnection {
 
   void cancelListen() {
     if (isConnected && isListening) {
+      isListening = false;
       listeningStream.cancel();
     }
   }

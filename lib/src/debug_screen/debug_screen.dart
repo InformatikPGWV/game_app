@@ -63,10 +63,12 @@ class _DebugScreenState extends State<DebugScreen> {
                 }
               }),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  await ws.setAddressFromMemory();
                   setState(() {
-                    ws.connectAndListen();
+                    print("Listening on: " + ws.getAddress());
                   });
+                  ws.connectAndListen();
                 },
                 child: Text("Connect"),
               ),
