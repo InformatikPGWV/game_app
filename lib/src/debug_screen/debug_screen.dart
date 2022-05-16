@@ -3,6 +3,7 @@ import 'package:game_app/src/ws_handeling/ws_connection.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'dart:convert';
 
 class DebugScreen extends StatefulWidget {
   DebugScreen({Key? key}) : super(key: key);
@@ -15,6 +16,21 @@ class DebugScreen extends StatefulWidget {
 
 class _DebugScreenState extends State<DebugScreen> {
   late var ws = context.read<WsConnection>();
+
+  void listenAndRepeatIMeanDecode() async {
+    ws.connectAndListen();
+    await Future.delayed(Duration(seconds: 1));
+    ws.stream.listen((event) {
+      // print(jsonDecode(event).runtimeType);
+      // print("Fettsack");
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    listenAndRepeatIMeanDecode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +58,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: Text(
                   "Network",
-                  style: GoogleFonts.lexendDeca().copyWith(
+                  style: GoogleFonts.sourceCodePro().copyWith(
                     fontSize: 30,
                     decoration: TextDecoration.underline,
                   ),
@@ -90,6 +106,69 @@ class _DebugScreenState extends State<DebugScreen> {
                 },
                 child: Text("Check"),
               ),
+
+              // BEGIN OF NEW SECTION
+              Divider(
+                color: Colors.red,
+                height: 10,
+              ),
+
+              // JSON
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: Text(
+                  "JSON",
+                  style: GoogleFonts.sourceCodePro().copyWith(
+                    fontSize: 30,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+
+              // Defaut Display
+              Builder(builder: (context) {
+                if (ws.isConnected) {
+                  return StreamBuilder(
+                    stream: ws.stream,
+                    builder: (ctx, snapshot) {
+                      return AutoSizeText(
+                        snapshot.data.toString(),
+                      );
+                    },
+                  );
+                } else {
+                  return Text("Not Connected");
+                }
+              }),
+
+              ElevatedButton(
+                onPressed: () async {
+                  Map dummy = {
+                    "sender": "clientP1",
+                    "reciever": "clientP2",
+                    "Timestamp": DateTime.now().toString(),
+                    "data": {
+                      "lorem": "ipsum",
+                      "dolor": ["sit", "amet"],
+                    },
+                  };
+
+                  String json = jsonEncode(dummy);
+
+                  ws.setAddressFromMemory();
+                  ws.connectAndListen();
+                  // await Future.delayed(Duration(seconds: 1));
+                  //Warum?????? Eigentlich sollte es ohne gehn.
+                  // Setstate is behindat LOL :/
+                  // setState(() {
+                  ws.sendData(json);
+                  // });
+                },
+                child: Text("Send Json"),
+              ),
+
+              // Decoded Json LOL
             ],
           ),
         ),
