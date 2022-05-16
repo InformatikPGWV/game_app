@@ -7,13 +7,15 @@ import 'package:game_app/src/ttt_game_screen/ttt_game_screen.dart';
 import 'package:game_app/src/debug_screen/debug_screen.dart';
 import 'package:game_app/src/settings_screen/settings_screen.dart';
 import 'package:game_app/src/story_game_screen/story_game_screen.dart';
+import 'package:game_app/src/pong_game_screen/pong_game_screen.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         Provider<WsConnection>(
-          create: (_) => WsConnection("ws://s1.astrago.de:6969"), //Official Server
+          create: (_) =>
+              WsConnection("ws://s1.astrago.de:6969"), //Official Server
           // create: (_) => WsConnection("ws://[::1]:6969"), //Localhost
         ),
       ],
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
         DebugScreen.routeName: (context) => DebugScreen(),
         SettingsScreen.routeName: (context) => SettingsScreen(),
         StoryGameScreen.routeName: (context) => StoryGameScreen(),
+        PongGameScreen.routeName: (context) => PongGameScreen(),
       },
       initialRoute: HomePage.routeName,
     );
