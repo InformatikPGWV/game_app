@@ -14,10 +14,12 @@ void main() {
     MultiProvider(
       providers: [
         Provider<WsConnection>(
-          create: (_) =>
-              WsConnection("ws://s1.astrago.de:6969"), //Official Server
+          create: (_) => WsConnection("ws://s1.astrago.de:6969"), //Official Server
           // create: (_) => WsConnection("ws://[::1]:6969"), //Localhost
         ),
+        // Provider<Player>(
+        //   create: (_) => Player.player1,
+        // ),
       ],
       child: MyApp(),
     ),

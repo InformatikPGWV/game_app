@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:game_app/src/ws_handeling/ws_connection.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// TODO:
+//
+// - Write WebSockets Connection
 
 class PongGameScreen extends StatefulWidget {
   const PongGameScreen({Key? key}) : super(key: key);
@@ -14,7 +19,23 @@ class PongGameScreen extends StatefulWidget {
 class _PongGameScreenState extends State<PongGameScreen> {
   late var ws = context.read<WsConnection>();
 
-  String player = "clientP1";
+  late String player;
+
+  @override
+  void initState() {
+    super.initState();
+    getPlayer();
+  }
+
+  void getPlayer() async {
+    var instance = await SharedPreferences.getInstance();
+    var loadedPlayer = await instance.getString("player");
+    if (loadedPlayer == "player1" || loadedPlayer == "player2") {
+      player = loadedPlayer!;
+    } else {
+      player = "player1";
+    }
+  }
 
   // --------------------
 
@@ -27,6 +48,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
         "action": "upPressed",
       }
     };
+    print(player);
   }
 
   void upReleased() {}
