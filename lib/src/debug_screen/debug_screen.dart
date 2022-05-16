@@ -16,20 +16,33 @@ class DebugScreen extends StatefulWidget {
 
 class _DebugScreenState extends State<DebugScreen> {
   late var ws = context.read<WsConnection>();
+  bool connected = false;
+  late var stream;
 
   void listenAndRepeatIMeanDecode() async {
-    ws.connectAndListen();
-    await Future.delayed(Duration(seconds: 1));
-    ws.stream.listen((event) {
-      // print(jsonDecode(event).runtimeType);
-      // print("Fettsack");
-    });
+    if (!connected) {
+      ws.connectAndListen();
+      await Future.delayed(Duration(seconds: 1));
+      stream = ws.stream.listen((event) {
+        print(jsonDecode(event).runtimeType);
+        // print("Fettsack");
+      });
+    } else {
+      print("Already Connected");
+    }
   }
 
   @override
   void initState() {
     super.initState();
     listenAndRepeatIMeanDecode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    stream.cancel();
+    ws.disconnect();
   }
 
   @override
@@ -146,8 +159,8 @@ class _DebugScreenState extends State<DebugScreen> {
                 onPressed: () async {
                   Map dummy = {
                     "sender": "clientP1",
-                    "reciever": "clientP2",
-                    "Timestamp": DateTime.now().toString(),
+                    "receiver": "server",
+                    "Timestamp": DateTime.now().millisecondsSinceEpoch,
                     "data": {
                       "lorem": "ipsum",
                       "dolor": ["sit", "amet"],

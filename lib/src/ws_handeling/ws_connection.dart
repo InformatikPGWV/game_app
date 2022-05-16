@@ -57,8 +57,8 @@ class WsConnection {
       if (isListening) {
         cancelListen();
       }
-      isConnected = false;
       channel.sink.close(status.normalClosure);
+      isConnected = false;
     }
   }
 
@@ -74,8 +74,8 @@ class WsConnection {
 
   void cancelListen() {
     if (isConnected && isListening) {
-      isListening = false;
       listeningStream.cancel();
+      isListening = false;
     }
   }
 
