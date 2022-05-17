@@ -46,6 +46,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
     Map data = {
       "sender": player,
       "receiver": "server",
+      "game": "pong",
       "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
       "data": {
         "action": "upPressed",
@@ -59,6 +60,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
     Map data = {
       "sender": player,
       "receiver": "server",
+      "game": "pong",
       "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
       "data": {
         "action": "upReleased",
@@ -74,6 +76,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
     Map data = {
       "sender": player,
       "receiver": "server",
+      "game": "pong",
       "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
       "data": {
         "action": "downPressed",
@@ -87,6 +90,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
     Map data = {
       "sender": player,
       "receiver": "server",
+      "game": "pong",
       "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
       "data": {
         "action": "downReleased",
