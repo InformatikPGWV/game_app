@@ -1,10 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:game_app/src/ws_handeling/ws_connection.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // TODO:
-//
 // - Write WebSockets Connection
 
 class PongGameScreen extends StatefulWidget {
@@ -25,6 +26,11 @@ class _PongGameScreenState extends State<PongGameScreen> {
   void initState() {
     super.initState();
     getPlayer();
+    connectToWs();
+  }
+
+  void connectToWs() {
+    ws.connectAndListen();
   }
 
   void getPlayer() async {
@@ -48,16 +54,50 @@ class _PongGameScreenState extends State<PongGameScreen> {
         "action": "upPressed",
       }
     };
-    print(player);
+
+    ws.sendData(jsonEncode(data));
   }
 
-  void upReleased() {}
+  void upReleased() {
+    Map data = {
+      "sender": player,
+      "receiver": "server",
+      "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
+      "data": {
+        "action": "upReleased",
+      }
+    };
+
+    ws.sendData(jsonEncode(data));
+  }
 
   // --------------------
 
-  void downPressed() {}
+  void downPressed() {
+    Map data = {
+      "sender": player,
+      "receiver": "server",
+      "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
+      "data": {
+        "action": "downPressed",
+      }
+    };
 
-  void downReleased() {}
+    ws.sendData(jsonEncode(data));
+  }
+
+  void downReleased() {
+    Map data = {
+      "sender": player,
+      "receiver": "server",
+      "timestamp": DateTime.now().microsecondsSinceEpoch.toString(),
+      "data": {
+        "action": "downReleased",
+      }
+    };
+
+    ws.sendData(jsonEncode(data));
+  }
 
   @override
   Widget build(BuildContext context) {
