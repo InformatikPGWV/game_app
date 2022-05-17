@@ -25,15 +25,12 @@ class _PongGameScreenState extends State<PongGameScreen> {
   @override
   void initState() {
     super.initState();
-    getPlayer();
-    connectToWs();
-  }
-
-  void connectToWs() {
+    getPlayerFromMemory();
+    ws.setAddressFromMemory();
     ws.connectAndListen();
   }
 
-  void getPlayer() async {
+  void getPlayerFromMemory() async {
     var instance = await SharedPreferences.getInstance();
     var loadedPlayer = await instance.getString("player");
     if (loadedPlayer == "player1" || loadedPlayer == "player2") {

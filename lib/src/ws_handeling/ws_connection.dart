@@ -25,8 +25,8 @@ class WsConnection {
   Future<void> setAddressFromMemory() async {
     var prefs = await SharedPreferences.getInstance();
     String? _urlFromSetting = await prefs.getString("serverAddress");
-    if (_urlFromSetting != null) {
-      wSUrl = _urlFromSetting;
+    if (_urlFromSetting != null || _urlFromSetting != "") {
+      wSUrl = _urlFromSetting!;
     }
   }
 
