@@ -10,30 +10,50 @@ import 'package:game_app/src/story_game_screen/story_game_screen.dart';
 import 'package:game_app/src/pong_game_screen/pong_game_screen.dart';
 
 void main() {
+  /// Starte die App
   runApp(
+    /// Verwende Provider um eine Inszanz der Objekte (Hier die WebSockets-Verbingung)
+    /// für alle darunter liegenden Objekte zur Verfügung zu stellen
     MultiProvider(
       providers: [
         Provider<WsConnection>(
+          /// Initialisiere WebSockets Objekt
           create: (_) => WsConnection("wss://wss.astrago.de"), //Official Server
           // create: (_) => WsConnection("ws://[::1]:6969"), //Localhost
         ),
-        // Provider<Player>(
-        //   create: (_) => Player.player1,
-        // ),
       ],
+
+      /// Erstelle eine Instanz der MyApp Klasse und verwende sie als
+      /// untergeordnetes Objekt
       child: MyApp(),
     ),
   );
 }
 
+/// Erstelle das App Widget
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  /// Erstelle bei der Build-Funktion den folgenden
+  /// Widget tree (Win Widget Tree ist, ähnlich wie
+  /// bei der Huffman Kodierung eine Struktur mit
+  /// untergeordneten Widgets)
   @override
   Widget build(BuildContext context) {
+    /// Die MaterialApp stellt die wichtigsten Features wie
+    /// Routing zur verfügung. Routing ist die Navigation
+    /// zwischen verschiedenen Bildschirmen (z.B. HomeScreen
+    /// und der Bildschirm mit den Steuerungselementen)
     return MaterialApp(
+      /// Der Titel wird in der Tab-Leiste dargestellt
       title: 'Game Companion Alpha',
+
+      /// Der "Debug" Banner, der normalerweise beim Debuggen
+      /// angezeigt wird, wird ausgeblendet.
       debugShowCheckedModeBanner: false,
+
+      /// Die Themes stellen ein Grund-Design zur Verfügung
+      /// Hier können Farben angepasst werden
       theme: ThemeData(
         colorScheme: ColorScheme.light().copyWith(
           primary: Color(0xFF284E6D),
@@ -47,15 +67,22 @@ class MyApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
+
+      /// Routs stellen die Einzelnen Bildschirme der App
+      /// dar. Sie haben einen Namen, mit dem sie aufgerufen
+      /// werden können. Man sieht diesen nach dem # in der
+      /// URL-Leiste des Browsers.
       routes: {
-        HomePage.routeName: (context) => HomePage(),
+        HomeScreen.routeName: (context) => HomeScreen(),
         TttGameScreen.routeName: (context) => TttGameScreen(),
         DebugScreen.routeName: (context) => DebugScreen(),
         SettingsScreen.routeName: (context) => SettingsScreen(),
         StoryGameScreen.routeName: (context) => StoryGameScreen(),
         PongGameScreen.routeName: (context) => PongGameScreen(),
       },
-      initialRoute: HomePage.routeName,
+
+      /// Die Standard Route, die beim Aufrufen der Website geöffnet werden soll.
+      initialRoute: HomeScreen.routeName,
     );
   }
 }
