@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:game_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum Player {

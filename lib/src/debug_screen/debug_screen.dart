@@ -16,26 +16,12 @@ class DebugScreen extends StatefulWidget {
 
 class _DebugScreenState extends State<DebugScreen> {
   late var ws = context.read<WsConnection>();
-  bool connected = false;
   late var stream;
-
-  void listenAndRepeatIMeanDecode() async {
-    if (!connected) {
-      ws.connectAndListen();
-      await Future.delayed(Duration(seconds: 1));
-      stream = ws.stream.listen((event) {
-        print(jsonDecode(event).runtimeType);
-        // print("Fettsack");
-      });
-    } else {
-      print("Already Connected");
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    listenAndRepeatIMeanDecode();
+    ws.connectAndListen();
   }
 
   @override
@@ -94,18 +80,17 @@ class _DebugScreenState extends State<DebugScreen> {
               TextButton(
                 onPressed: () async {
                   await ws.setAddressFromMemory();
-                  setState(() {
-                    print("Listening on: " + ws.getAddress());
-                  });
                   ws.connectAndListen();
                 },
                 child: Text("Connect"),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  ws.setAddressFromMemory();
+                  ws.connectAndListen();
                   ws.sendData(DateTime.now().toString());
                 },
-                child: Text("Send"),
+                child: Text("Send String"),
               ),
               TextButton(
                 onPressed: () {

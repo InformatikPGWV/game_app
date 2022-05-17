@@ -120,6 +120,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
                   child: Listener(
                     onPointerDown: (details) => upPressed(),
                     onPointerUp: (details) => upReleased(),
+                    // Button wird nur für das Layout verwendet. Er führt keine Funktion aus.
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Icon(
@@ -140,6 +141,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
                   child: Listener(
                     onPointerDown: (details) => downPressed(),
                     onPointerUp: (details) => downReleased(),
+                    // Button wird nur für das Layout verwendet. Er führt keine Funktion aus.
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Icon(
