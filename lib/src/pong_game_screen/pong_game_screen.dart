@@ -81,7 +81,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
   }
 
   /// Funktion die beim loslassen des Hoch-Buttons ausgeführt wird.
-  /// Deteils: Siehe Beshreibung von upPressed
+  /// Details: Siehe Beshreibung von upPressed
   void upReleased() {
     Map data = {
       "sender": player,
@@ -99,7 +99,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
   // --------------------
 
   /// Funktion die beim herunterdrücken des runter-Buttons ausgeführt wird.
-  /// Deteils: Siehe Beshreibung von upPressed
+  /// Details: Siehe Beshreibung von upPressed
   void downPressed() {
     Map data = {
       "sender": player,
@@ -115,7 +115,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
   }
 
   /// Funktion die beim loslassen des Runter-Buttons ausgeführt wird.
-  /// Deteils: Siehe Beshreibung von upPressed
+  /// Details: Siehe Beshreibung von upPressed
   void downReleased() {
     Map data = {
       "sender": player,
@@ -158,13 +158,20 @@ class _PongGameScreenState extends State<PongGameScreen> {
               /// Flexible teilt sich den Platz gerecht (wenn nicht anders
               /// angegeben) mit den anderen Flex-Widgets in der Zeile ein.
               Flexible(
+                /// Box, die größtmöglichen Plazu einnimmt
                 child: SizedBox(
                   height: double.infinity,
                   width: double.infinity,
+
+                  /// Listener kann auf Interaktionen reagieren.
+                  /// In diesem fall, führt er eine Funktion aus, wenn man
+                  /// den Knopf herunterdrückt und eine andere Funktion,
+                  /// wenn man den knopf loslässt.
                   child: Listener(
                     onPointerDown: (details) => upPressed(),
                     onPointerUp: (details) => upReleased(),
-                    // Button wird nur für das Layout verwendet. Er führt keine Funktion aus.
+
+                    /// Button wird nur für das Layout verwendet. Er führt keine Funktion aus.
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Icon(
@@ -175,9 +182,13 @@ class _PongGameScreenState extends State<PongGameScreen> {
                   ),
                 ),
               ),
+
+              /// Abstand zum anderen Button
               SizedBox(
                 height: 8,
               ),
+
+              /// Beschreibung s.o.
               Flexible(
                 child: SizedBox(
                   height: double.infinity,
@@ -185,7 +196,6 @@ class _PongGameScreenState extends State<PongGameScreen> {
                   child: Listener(
                     onPointerDown: (details) => downPressed(),
                     onPointerUp: (details) => downReleased(),
-                    // Button wird nur für das Layout verwendet. Er führt keine Funktion aus.
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Icon(
