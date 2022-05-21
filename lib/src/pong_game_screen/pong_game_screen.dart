@@ -63,7 +63,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
   // --------------------
 
   /// Funktion die beim herunterdrücken des Hoch-Buttons ausgeführt wird.
-  void upPressed() {
+  void btnPressed(String action) {
     /// Erstelle eine Map mit den zu versendenden Daten
     Map data = {
       "sender": player,
@@ -71,62 +71,12 @@ class _PongGameScreenState extends State<PongGameScreen> {
       "game": "pong",
       "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
       "data": {
-        "action": "upPressed",
+        "action": action,
       }
     };
 
     /// Kodiere die Daten ins Json-Format und
     /// sende die Daten an den Server
-    ws.sendData(jsonEncode(data));
-  }
-
-  /// Funktion die beim loslassen des Hoch-Buttons ausgeführt wird.
-  /// Details: Siehe Beshreibung von upPressed
-  void upReleased() {
-    Map data = {
-      "sender": player,
-      "receiver": "server",
-      "game": "pong",
-      "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
-      "data": {
-        "action": "upReleased",
-      }
-    };
-
-    ws.sendData(jsonEncode(data));
-  }
-
-  // --------------------
-
-  /// Funktion die beim herunterdrücken des runter-Buttons ausgeführt wird.
-  /// Details: Siehe Beshreibung von upPressed
-  void downPressed() {
-    Map data = {
-      "sender": player,
-      "receiver": "server",
-      "game": "pong",
-      "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
-      "data": {
-        "action": "downPressed",
-      }
-    };
-
-    ws.sendData(jsonEncode(data));
-  }
-
-  /// Funktion die beim loslassen des Runter-Buttons ausgeführt wird.
-  /// Details: Siehe Beshreibung von upPressed
-  void downReleased() {
-    Map data = {
-      "sender": player,
-      "receiver": "server",
-      "game": "pong",
-      "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
-      "data": {
-        "action": "downReleased",
-      }
-    };
-
     ws.sendData(jsonEncode(data));
   }
 
@@ -168,8 +118,8 @@ class _PongGameScreenState extends State<PongGameScreen> {
                   /// den Knopf herunterdrückt und eine andere Funktion,
                   /// wenn man den knopf loslässt.
                   child: Listener(
-                    onPointerDown: (details) => upPressed(),
-                    onPointerUp: (details) => upReleased(),
+                    onPointerDown: (details) => btnPressed("upPressed"),
+                    onPointerUp: (details) => btnPressed("upReleased"),
 
                     /// Button wird nur für das Layout verwendet. Er führt keine Funktion aus.
                     child: ElevatedButton(
@@ -194,8 +144,8 @@ class _PongGameScreenState extends State<PongGameScreen> {
                   height: double.infinity,
                   width: double.infinity,
                   child: Listener(
-                    onPointerDown: (details) => downPressed(),
-                    onPointerUp: (details) => downReleased(),
+                    onPointerDown: (details) => btnPressed("downPressed"),
+                    onPointerUp: (details) => btnPressed("downReleased"),
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Icon(
