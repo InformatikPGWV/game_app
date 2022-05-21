@@ -37,6 +37,13 @@ class _PongGameScreenState extends State<PongGameScreen> {
     ws.connectAndListen();
   }
 
+  void reconnect() async {
+    ws.disconnect();
+    await Future.delayed(Duration(milliseconds: 100));
+    ws.setAddressFromMemory();
+    ws.connectAndListen();
+  }
+
   /// Lade den gespeicherten Spieler aus dem Speicher
   void getPlayerFromMemory() async {
     /// Erstelle Instanz von Shared Preferences.
@@ -59,8 +66,6 @@ class _PongGameScreenState extends State<PongGameScreen> {
       player = "player1";
     }
   }
-
-  // --------------------
 
   /// Funktion die beim herunterdrücken des Hoch-Buttons ausgeführt wird.
   void btnPressed(String action) {
@@ -88,6 +93,12 @@ class _PongGameScreenState extends State<PongGameScreen> {
       /// "Pong"
       appBar: AppBar(
         title: Text("Pong"),
+        actions: [
+          IconButton(
+            onPressed: () => reconnect(),
+            icon: Icon(Icons.replay_outlined),
+          ),
+        ],
       ),
 
       /// Erstelle ein Abstands-Widget mit dem Abstand von

@@ -90,30 +90,30 @@ class HomeScreen extends StatelessWidget {
               height: 20,
             ),
 
-            /// Lücke von 8px um das gesamte untergeordnete Objekt
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            // /// Lücke von 8px um das gesamte untergeordnete Objekt
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
 
-              /// Die Sized Box streckt die breite des Knopfes auf 400px
-              child: SizedBox(
-                width: 400,
+            //   /// Die Sized Box streckt die breite des Knopfes auf 400px
+            //   child: SizedBox(
+            //     width: 400,
 
-                /// Knopf mit hintergrund und Schatten
-                child: ElevatedButton(
-                  /// Beim drücken:
-                  onPressed: () {
-                    /// pffne den Tic-Tac-Toe Bildschirm
-                    Navigator.of(context).pushNamed(TttGameScreen.routeName);
-                  },
+            //     /// Knopf mit hintergrund und Schatten
+            //     child: ElevatedButton(
+            //       /// Beim drücken:
+            //       onPressed: () {
+            //         /// pffne den Tic-Tac-Toe Bildschirm
+            //         Navigator.of(context).pushNamed(TttGameScreen.routeName);
+            //       },
 
-                  /// Dargestellter Text im Knopf
-                  child: Text("Tic-Tac-Toe"),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
-                  ),
-                ),
-              ),
-            ),
+            //       /// Dargestellter Text im Knopf
+            //       child: Text("Tic-Tac-Toe"),
+            //       style: ElevatedButton.styleFrom(
+            //         primary: Colors.green,
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
             /// Gleiche Beschreibung wie beim Widget darüber
             /// Außer: Jetzt wird der Pong-Screen Verwendet
@@ -127,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: Text("Pong"),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.purple,
+                    primary: Colors.teal,
                   ),
                 ),
               ),
