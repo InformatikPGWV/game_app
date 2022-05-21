@@ -37,6 +37,7 @@ class _PongGameScreenState extends State<PongGameScreen> {
     ws.connectAndListen();
   }
 
+  // FUNKTIONIERT NICHT (zuverlässig, also meistens nicht)
   void reconnect() async {
     ws.disconnect();
     await Future.delayed(Duration(milliseconds: 100));
@@ -93,12 +94,12 @@ class _PongGameScreenState extends State<PongGameScreen> {
       /// "Pong"
       appBar: AppBar(
         title: Text("Pong"),
-        actions: [
-          IconButton(
-            onPressed: () => reconnect(),
-            icon: Icon(Icons.replay_outlined),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () => reconnect(),
+        //     icon: Icon(Icons.replay_outlined),
+        //   ),
+        // ],
       ),
 
       /// Erstelle ein Abstands-Widget mit dem Abstand von
