@@ -6,7 +6,6 @@ import 'package:game_app/src/home_screen/home_screen.dart';
 import 'package:game_app/src/ttt_game_screen/ttt_game_screen.dart';
 import 'package:game_app/src/debug_screen/debug_screen.dart';
 import 'package:game_app/src/settings_screen/settings_screen.dart';
-import 'package:game_app/src/story_game_screen/story_game_screen.dart';
 import 'package:game_app/src/pong_game_screen/pong_game_screen.dart';
 
 void main() {
@@ -77,7 +76,6 @@ class MyApp extends StatelessWidget {
         TttGameScreen.routeName: (context) => TttGameScreen(),
         DebugScreen.routeName: (context) => DebugScreen(),
         SettingsScreen.routeName: (context) => SettingsScreen(),
-        StoryGameScreen.routeName: (context) => StoryGameScreen(),
         PongGameScreen.routeName: (context) => PongGameScreen(),
       },
 
