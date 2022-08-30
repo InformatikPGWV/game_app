@@ -17,7 +17,7 @@ void main() {
       providers: [
         Provider<WsConnection>(
           /// Initialisiere WebSockets Objekt
-          create: (_) => WsConnection("wss://wss.astrago.de"), //Official Server
+          create: (_) => WsConnection("ws://ws.astrago.de:6969"), //Official Server
           // create: (_) => WsConnection("ws://[::1]:6969"), //Localhost
         ),
       ],
